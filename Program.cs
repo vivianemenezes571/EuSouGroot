@@ -1,30 +1,52 @@
-﻿const string FraseParaSair = "tchau";
+﻿Console.WriteLine("--- Esperto Contra Sabido ---\n");
 
-Console.WriteLine("--- Groot Chatbot ---\n");
+Console.Write("Quantos alimentos serão distribuídos? ");
+int total = Convert.ToInt32(Console.ReadLine());
 
-string pergunta;
-do
+if (total <= 0) return;
+
+Console.WriteLine();
+
+int restantes = total;
+int picaPau = 0, raposinha = 0;
+
+int contadorParaVoce = 0, contadorParaMim = 0;
+while (restantes > 0)
 {
-    Console.Write("Pergunta: ");
-    pergunta = Console.ReadLine()!;
+    contadorParaVoce++;
+    picaPau += 1;
+    restantes -= 1;
 
-    string resposta = ObtemRespostaGroot(pergunta);
+    Console.Write($"{picaPau} para você. ");
 
-    ExibeResposta(ObtemRespostaGroot(pergunta));
+    contadorParaMim = 0;
+    while (restantes > 0 && contadorParaMim < contadorParaVoce)
+    {
+        contadorParaMim++;
+        raposinha += 1;
+        restantes -= 1;
 
-} while (pergunta.Trim().ToLower() != FraseParaSair);
+        Console.Write($"{contadorParaMim}");
 
+        if (restantes > 0 && contadorParaMim < contadorParaVoce)
+        {
+            Console.Write(",");
+        }
 
-void ExibeResposta(string resposta)
-{
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine($"                          Resposta: {resposta}");
-    Console.ResetColor();
+        Console.Write(" ");
+    }
+
+    if (contadorParaMim > 0)
+    {
+        Console.WriteLine("para mim.");
+    }
 }
 
-string ObtemRespostaGroot(string pergunta)
+if (contadorParaMim == 0)
 {
-    return pergunta.Trim().ToLower() == FraseParaSair ?
-        "Eu sou Groot!" :
-        "Eu sou Groot.";
+    Console.WriteLine();
 }
+
+Console.WriteLine();
+Console.WriteLine($"Pica-pau recebeu {picaPau} alimento(s).");
+Console.WriteLine($"Raposinha recebeu {raposinha} alimento(s).");
